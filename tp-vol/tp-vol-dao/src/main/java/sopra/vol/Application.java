@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import sopra.vol.dao.IReservationDao;
+import sopra.vol.dao.sql.ReservationDaoSql;
+
 public class Application {
 	private static Application instance = null;
 
 	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
 	private final String username = "root";
 	private final String password = "admin";
+	
+	private final IReservationDao reservationDao = new ReservationDaoSql();
 
 	private Application() {
 		super();
@@ -32,4 +37,9 @@ public class Application {
 		return DriverManager.getConnection(jdbcUrl, username, password);
 	}
 
+	public IReservationDao getReservationDao() {
+		return reservationDao;
+	}
+
+	
 }
