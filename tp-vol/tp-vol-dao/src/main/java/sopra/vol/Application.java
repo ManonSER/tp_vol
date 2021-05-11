@@ -4,8 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+import sopra.vol.dao.IPassagerDao;
+import sopra.vol.dao.sql.PassagerDaoSql;
+
 public class Application {
 	private static Application instance = null;
+	
+	private final IPassagerDao passagerDao = new PassagerDaoSql();
 
 	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
 	private final String username = "root";
@@ -18,6 +24,9 @@ public class Application {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	public IPassagerDao getPassagerDao() {
+		return passagerDao;
 	}
 
 	public static Application getInstance() {
