@@ -7,20 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-
 import sopra.vol.Application;
-import sopra.vol.dao.IPassagerDao;
-import sopra.vol.model.Passager;
-import sopra.vol.model.TypeIdentite;
+import sopra.vol.dao.IAdresseDao;
+import sopra.vol.model.Adresse;
 
-public class PassagerDaoSql implements IPassagerDao {
+
+public class AdresseDaoSql implements IAdresseDao {
 
 	@Override
-	public List<Passager> findAll() {
-		List<Passager> passagers = new ArrayList<Passager>();
+	public List<Adresse> findAll() {
+		
+List<Adresse> adresses = new ArrayList<Adresse>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -30,24 +29,26 @@ public class PassagerDaoSql implements IPassagerDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"SELECT id, nom, prenom, numero_Identite, type_Identite FROM passager ");
+					"SELECT id, rue, complement, code_Postal, ville, pays FROM Adresse ");
 
-			preparedStatement.setString(1, "Passager");
+			//preparedStatement.setString(1, "Adresse");
 
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				Long id = resultSet.getLong("id");
-				String nom = resultSet.getString("nom");
-				String prenom = resultSet.getString("prenom");
-				String numeroIdentite = resultSet.getString("numero_Identite");
-				TypeIdentite typeIdentite = TypeIdentite.valueOf(resultSet.getString("type_Identite"));
+				String rue = resultSet.getString("rue");
+				String complement = resultSet.getString("complement");
+				String codePostal = resultSet.getString("code_Postal");
+				String ville = resultSet.getString("ville");
+				String pays = resultSet.getString("pays");
 				
+						
 
-				Passager passager = new Passager(id, nom, prenom, numeroIdentite, typeIdentite);
+				Adresse adresse = new Adresse(id, rue, complement, codePostal, ville, pays);
 
 				
-				passagers.add(passager);
+				adresses.add(adresse);
 			}
 
 		} catch (SQLException e) {
@@ -62,14 +63,13 @@ public class PassagerDaoSql implements IPassagerDao {
 			}
 		}
 
-		return passagers;
+		return adresses;
 	}
-		
-	
+
 	@Override
-	public Passager findById(Long id) {
+	public Adresse findById(Long id) {
 		
-		Passager passager = null;
+		Adresse adresse = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -78,7 +78,7 @@ public class PassagerDaoSql implements IPassagerDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"SELECT nom, prenom, numero_Identite, type_Identite FROM passager WHERE  id = ?");
+					"SELECT rue, complement, code_Postal, ville, pays FROM adresse WHERE  id = ?");
 			
 			preparedStatement.setLong(1, id);
 
@@ -86,13 +86,15 @@ public class PassagerDaoSql implements IPassagerDao {
 
 			while (resultSet.next()) {
 			
-				String nom = resultSet.getString("nom");
-				String prenom = resultSet.getString("prenom");
-				String numeroIdentite = resultSet.getString("numero_Identite");
-				TypeIdentite typeIdentite = TypeIdentite.valueOf(resultSet.getString("type_Identite"));
+								String rue = resultSet.getString("rue");
+				String complement = resultSet.getString("complement");
+				String codePostal = resultSet.getString("code_Postal");
+				String ville = resultSet.getString("ville");
+				String pays = resultSet.getString("pays");
+			
 
 
-			passager = new Passager(id, nom, prenom, numeroIdentite, typeIdentite);
+				adresse = new Adresse(id, rue, complement, codePostal, ville, pays);
 			}
 						
 
@@ -114,14 +116,13 @@ public class PassagerDaoSql implements IPassagerDao {
 		}
 	}
 
-	return passager;
+	return adresse;
 }
 
-
 	@Override
-	public void create(Passager obj) {
-	
-		Passager passager = null;
+	public void create(Adresse obj) {
+		
+		Adresse adresse = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -130,20 +131,18 @@ public class PassagerDaoSql implements IPassagerDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO passager (nom, prenom, numero_Identite, type_Identite)  VALUES (?,?,?,?)",
+					"INSERT INTO adresse (rue, complement, code_Postal, ville, pays )  VALUES (?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
-			preparedStatement.setString(1, "Passager");
+			//preparedStatement.setString(1, "adresse");
 			
-			if (obj.getTypeIdentite() != null) {
-				preparedStatement.setString(4, obj.getTypeIdentite().toString());
-			} else {
-				preparedStatement.setNull(4, Types.VARCHAR);
-			}
+					
+			preparedStatement.setString(1, obj.getRue());
+			preparedStatement.setString(2, obj.getComplement());
+			preparedStatement.setString(3, obj.getCodePostal());
+			preparedStatement.setString(4, obj.getVille());
+			preparedStatement.setString(5, obj.getPays());
 			
-			preparedStatement.setString(1, obj.getNom());
-			preparedStatement.setString(2, obj.getPrenom());
-			preparedStatement.setString(3, obj.getNumeroIdentite());
 							
 			
 			int rows = preparedStatement.executeUpdate();
@@ -180,8 +179,11 @@ public class PassagerDaoSql implements IPassagerDao {
 		
 	}
 
+		
+	
+
 	@Override
-	public void update(Passager obj) {
+	public void update(Adresse obj) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -190,18 +192,15 @@ public class PassagerDaoSql implements IPassagerDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"UPDATE passager SET  nom = ?, prenom = ?, numero_Identite= ?,  type_Identite = ? where id = ?");
+					"UPDATE adresse SET  rue = ?, complement = ?, code_Postal= ?,  ville = ?,  pays = ? where id = ?");
 
-			if (obj.getTypeIdentite() != null) {
-				preparedStatement.setString(4, obj.getTypeIdentite().toString());
-			} else {
-				preparedStatement.setNull(4, Types.VARCHAR);
-			}
-
-			preparedStatement.setString(1, obj.getNom());
-			preparedStatement.setString(2, obj.getPrenom());
-			preparedStatement.setString(3, obj.getNumeroIdentite());
-			preparedStatement.setLong(5, obj.getId());
+			
+			preparedStatement.setString(1, obj.getRue());
+			preparedStatement.setString(2, obj.getComplement());
+			preparedStatement.setString(3, obj.getCodePostal());
+			preparedStatement.setString(4, obj.getVille());
+			preparedStatement.setString(5, obj.getPays());
+			preparedStatement.setLong(6, obj.getId());
 			
 			preparedStatement.executeUpdate();
 			
@@ -217,22 +216,24 @@ public class PassagerDaoSql implements IPassagerDao {
 		}
 	}
 		
-
+		
+	
 	@Override
-	public void delete(Passager obj) {
+	public void delete(Adresse obj) {
 		deleteById(obj.getId());
 		
 	}
 
 	@Override
 	public void deleteById(Long id) {
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
 
-			preparedStatement = connection.prepareStatement("DELETE passager from passager WHERE id = ?");
+			preparedStatement = connection.prepareStatement("DELETE adresse from adresse WHERE id = ?");
 
 			preparedStatement.setLong(1, id);
 
@@ -248,6 +249,8 @@ public class PassagerDaoSql implements IPassagerDao {
 				e.printStackTrace();
 			}
 		}
+
+		
 	}
 
 }
