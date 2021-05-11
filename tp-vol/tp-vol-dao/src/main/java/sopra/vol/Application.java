@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import sopra.vol.dao.IClientDao;
+import sopra.vol.dao.IDao;
+import sopra.vol.dao.sql.ClientDaoSql;
+import sopra.vol.model.Client;
+
 public class Application {
 	private static Application instance = null;
 
@@ -11,6 +16,8 @@ public class Application {
 	private final String username = "root";
 	private final String password = "admin";
 
+	private final IClientDao clientDao = new ClientDaoSql();
+	
 	private Application() {
 		super();
 		try {
@@ -28,8 +35,16 @@ public class Application {
 		return instance;
 	}
 
+	
+	
+	public IClientDao getClientDao() {
+		return clientDao;
+	}
+
 	public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(jdbcUrl, username, password);
 	}
+
+
 
 }
