@@ -5,8 +5,12 @@ import java.util.List;
 
 import sopra.vol.Application;
 import sopra.vol.dao.IAdresseDao;
+import sopra.vol.dao.ICompagnieAerienneDao;
+import sopra.vol.dao.ICompagnieAerienneVolDao;
 import sopra.vol.dao.IPassagerDao;
 import sopra.vol.model.Adresse;
+import sopra.vol.model.CompagnieAerienne;
+import sopra.vol.model.CompagnieAerienneVol;
 import sopra.vol.model.Passager;
 import sopra.vol.model.TypeIdentite;
 
@@ -16,6 +20,8 @@ public class Test {
 
 		IPassagerDao passagerDao = Application.getInstance().getPassagerDao();
 		IAdresseDao adresseDao = Application.getInstance().getAdresseDao();
+		ICompagnieAerienneDao compagnieAerienneDao = Application.getInstance().getCompagnieAerienneDao();
+		ICompagnieAerienneVolDao compagnieAerienneVolDao = Application.getInstance().getCompagnieAerienneVolDao();
 					
 
 		Passager passager1 = new Passager();
@@ -78,9 +84,21 @@ public class Test {
 		
 		adresseDao.deleteById(1L);
 		
+		//*******************CompagnieAerienne************************
 		
-		
-		
+		CompagnieAerienne compagnieAerienne1 = new CompagnieAerienne();
+		 compagnieAerienne1.setNom("Soprairlines");
+		 compagnieAerienneDao.create(compagnieAerienne1);
+		 
+		 
+		//*******************CompagnieAerienne************************
+			
+			CompagnieAerienneVol compagnieAerienneVol1 = new CompagnieAerienneVol();
+			 compagnieAerienneVol1.setNumeroVol("ABCD");
+			 compagnieAerienneVolDao.create(compagnieAerienneVol1);
+		 
+		 
+		 
 		
 		
 		
