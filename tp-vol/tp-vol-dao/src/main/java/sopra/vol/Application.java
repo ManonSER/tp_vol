@@ -31,19 +31,14 @@ public class Application {
 	
 	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("vol-jpa");
 	private static Application instance = null;
-	private final IBilletDao billetDao = new BilletDaoSql();
 	
+	
+	private final IBilletDao billetDao = new BilletDaoSql();
 	private final IPassagerDao passagerDao = new PassagerDaoSql();
 	private final IAdresseDao adresseDao = new AdresseDaoSql();
 	private final ICompagnieAerienneDao compagnieAerienneDao = new CompagnieAerienneDaoSql();
 	private final ICompagnieAerienneVolDao compagnieAerienneVolDao = new CompagnieAerienneVolDaoSql();
-
-//	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
-//	private final String username = "root";
-//	private final String password = "admin";
-	
 	private final IReservationDao reservationDao = new ReservationDaoSql();
-
 	private final IClientDao clientDao = new ClientDaoSql();
 	
 	private Application() {
