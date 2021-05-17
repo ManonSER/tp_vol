@@ -11,16 +11,19 @@ import sopra.vol.dao.IReservationDao;
 import sopra.vol.dao.IVilleDao;
 import sopra.vol.dao.sql.ReservationDaoSql;
 import sopra.vol.repository.IAdresseRepositoryJpa;
+import sopra.vol.repository.IBilletRepositoryJpa;
 import sopra.vol.repository.IClientRepositoryJpa;
 import sopra.vol.repository.ICompagnieAerienneRepositoryJpa;
 import sopra.vol.repository.ICompagnieAerienneVolRepositoryJpa;
 import sopra.vol.repository.IPassagerRepositoryJpa;
 import sopra.vol.repository.IReservationRepositoryJpa;
 import sopra.vol.repository.IVilleRepositoryJpa;
+import sopra.vol.repository.jpa.AdresseRepoJpa;
+import sopra.vol.repository.jpa.ClientRepoJpa;
 import sopra.vol.repository.jpa.CompagnieAerienneRepoJpa;
 import sopra.vol.repository.jpa.CompagnieAerienneVolRepoJpa;
 import sopra.vol.repository.jpa.PassagerRepoJpa;
-import sopra.vol.repository.jpa.PassagerRepoJpa;
+import sopra.vol.repository.jpa.ReservationRepoJpa;
 import sopra.vol.repository.jpa.VilleRepoJpa;
 import sopra.vol.dao.IBilletDao;
 import sopra.vol.dao.sql.BilletDaoSql;
@@ -37,7 +40,7 @@ import sopra.vol.dao.sql.PassagerDaoSql;
 import sopra.vol.dao.IClientDao;
 import sopra.vol.dao.IDao;
 import sopra.vol.dao.sql.ClientDaoSql;
-//import sopra.vol.model.Client;
+import sopra.vol.model.Client;
 
 public class Application {
 	
@@ -45,13 +48,13 @@ public class Application {
 	private static Application instance = null;
 	
 	
-	private final IBilletDao billetDao = new BilletDaoSql();
+	private final IBilletRepositoryJpa billetDao = new BilletRepoJpa();
 	private final IPassagerRepositoryJpa passagerDao = new PassagerRepoJpa();
-	private final IAdresseRepositoryJpa adresseDao = new AdresseDaoSql();
+	private final IAdresseRepositoryJpa adresseDao = new AdresseRepoJpa();
 	private final ICompagnieAerienneRepositoryJpa compagnieAerienneDao = new CompagnieAerienneRepoJpa();
 	private final ICompagnieAerienneVolRepositoryJpa compagnieAerienneVolDao = new CompagnieAerienneVolRepoJpa();
-	private final IReservationRepositoryJpa reservationDao = new ReservationDaoSql();
-	private final IClientRepositoryJpa clientDao = new ClientDaoSql();
+	private final IReservationRepositoryJpa reservationDao = new ReservationRepoJpa();
+	private final IClientRepositoryJpa clientDao = new ClientRepoJpa();
 	private final IVilleRepositoryJpa villeDao = new VilleRepoJpa();
 	
 	private Application() {
@@ -62,21 +65,21 @@ public class Application {
 			e.printStackTrace();
 		}
 	}
-	public IPassagerDao getPassagerDao() {
+	public IPassagerRepositoryJpa getPassagerDao() {
 		return passagerDao;
 	}
 	
-	public IAdresseDao getAdresseDao() {
+	public IAdresseRepositoryJpa getAdresseDao() {
 		return adresseDao;
 	}
-	public ICompagnieAerienneDao getCompagnieAerienneDao() {
+	public ICompagnieAerienneRepositoryJpa getCompagnieAerienneDao() {
 		return compagnieAerienneDao;
 	}
-	public ICompagnieAerienneVolDao getCompagnieAerienneVolDao() {
+	public ICompagnieAerienneVolRepositoryJpa getCompagnieAerienneVolDao() {
 		return compagnieAerienneVolDao;
 	}
 
-	public IBilletDao getBilletDao() {
+	public IBilletRepositoryJpa getBilletDao() {
 		return billetDao;
 	}
 
@@ -90,7 +93,7 @@ public class Application {
 
 	
 	
-	public IClientDao getClientDao() {
+	public IClientRepositoryJpa getClientDao() {
 		return clientDao;
 	}
 
@@ -98,7 +101,7 @@ public class Application {
 		return emf;
 	}
 
-	public IReservationDao getReservationDao() {
+	public IReservationRepositoryJpa getReservationDao() {
 		return reservationDao;
 	}
 
