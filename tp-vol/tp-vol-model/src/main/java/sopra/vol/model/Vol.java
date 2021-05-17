@@ -5,38 +5,37 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
-@Table(name = "Vol")
+@Table(name = "Flight")
 public class Vol {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name = "statut_Vol")
+	@Column(name = "statut_flight")
 	private StatutVol statutVol;
-	@Column(name = "dt_Depart")
+	@Column(name = "dt_start")
 	private Date dtDepart;
-	@Column(name = "dt_Arrivee")
+	@Column(name = "dt_arrival")
 	private Date dtArrivee;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aeroport_depart")
+	@JoinColumn(name = "start_airport")
 	private Aeroport depart;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aeroport_arrivee")
+	@JoinColumn(name = "arrival_airport")
 	private Aeroport arrivee;
-	@Column(name  = "nb_de_place_dispo")
+	@Column(name  = "nb_of_free_place")
 	private int nbPlaceDispo;
-	@ManyToOne(mappedBy = "vol")
+	@OneToMany(mappedBy = "vol")
 	private List<Billet> billets = new ArrayList<>();
-	@ManyToOne(mappedBy = "vol")
+	@OneToMany(mappedBy = "vol")
 	private List<CompagnieAerienneVol> compagnieAeriennes = new ArrayList<CompagnieAerienneVol>();
 
 	public Vol() {
