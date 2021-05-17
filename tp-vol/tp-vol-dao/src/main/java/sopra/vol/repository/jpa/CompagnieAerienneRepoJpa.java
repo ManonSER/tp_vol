@@ -8,16 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.vol.Application;
-import sopra.vol.model.Adresse;
-import sopra.vol.repository.IAdresseRepositoryJpa;
+import sopra.vol.model.CompagnieAerienne;
+import sopra.vol.model.Passager;
+import sopra.vol.repository.ICompagnieAerienneRepositoryJpa;
 
-public class AdresseRepoJpa implements IAdresseRepositoryJpa {
+public class CompagnieAerienneRepoJpa implements ICompagnieAerienneRepositoryJpa {
 
 	@Override
-	public List<Adresse> findAll() {
-		// TODO Auto-generated method stub
-		
-		List<Adresse> adresses = new ArrayList<Adresse>();
+	public List<CompagnieAerienne> findAll() {
+		List<CompagnieAerienne> compagnieAeriennes = new ArrayList<CompagnieAerienne>();
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -27,9 +26,9 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Adresse> query = em.createQuery("select e from Adresse e", Adresse.class);
+			TypedQuery<CompagnieAerienne> query = em.createQuery("select c from CompagnieAerienne c", CompagnieAerienne.class);
 
-			adresses = query.getResultList();
+			compagnieAeriennes = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -44,13 +43,12 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresses;
+		return compagnieAeriennes;
 	}
 
 	@Override
-	public Adresse findById(Long id) {
-		// TODO Auto-generated method stub
-		Adresse adresse = null;
+	public CompagnieAerienne findById(String code) {
+		CompagnieAerienne compagnieAerienne = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -60,7 +58,7 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			adresse = em.find(Adresse.class, id);
+			compagnieAerienne = em.find(CompagnieAerienne.class, code);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -75,7 +73,7 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresse;
+		return compagnieAerienne;
 	}
-	
+
 }
