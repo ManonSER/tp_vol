@@ -8,12 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import sopra.formation.Application;
-import sopra.formation.model.Evaluation;
+import sopra.vol.Application;
 import sopra.vol.model.Reservation;
+import sopra.vol.repository.IReservationRepositoryJpa;
 
 
-public class ReservationRepositoryJpa implements IReservationRepository{
+public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
 
 	public List<Reservation> findAll() {
 		List<Reservation> reservations = new ArrayList<Reservation>();
@@ -47,7 +47,7 @@ public class ReservationRepositoryJpa implements IReservationRepository{
 		
 	}
 	
-	public Reservation findById(Long numero) {
+	public Reservation findById(Integer numero) {
 		Reservation reservation = null;
 
 		EntityManager em = null;
