@@ -1,5 +1,6 @@
 package sopra.vol.repository.jpa;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,28 +8,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-
 import sopra.vol.Application;
-import sopra.vol.model.Passager;
-import sopra.vol.repository.IRepository;
+import sopra.vol.model.Reservation;
+import sopra.vol.repository.IReservationRepositoryJpa;
 
-public class PassagerRepoJpa implements IRepository<Passager, Long>{
 
-	@Override
-	public List<Passager> findAll() {
-		List<Passager> passagers = new ArrayList<Passager>();
+public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
 
+	public List<Reservation> findAll() {
+		List<Reservation> reservations = new ArrayList<Reservation>();
+		
 		EntityManager em = null;
 		EntityTransaction tx = null;
-
+		
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Passager> query = em.createQuery("select p from Passager p", Passager.class);
+			TypedQuery<Reservation> query = em.createQuery("select r from Reservation r", Reservation.class);
 
-			passagers = query.getResultList();
+			reservations = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -43,11 +43,12 @@ public class PassagerRepoJpa implements IRepository<Passager, Long>{
 			}
 		}
 
-		return passagers;
+		return reservations;
+		
 	}
-	@Override
-	public Passager findById(Long id) {
-		Passager passager = null;
+	
+	public Reservation findById(Integer numero) {
+		Reservation reservation = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -57,7 +58,7 @@ public class PassagerRepoJpa implements IRepository<Passager, Long>{
 			tx = em.getTransaction();
 			tx.begin();
 
-			passager = em.find(Passager.class, id);
+			reservation = em.find(Reservation.class, numero);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -72,10 +73,10 @@ public class PassagerRepoJpa implements IRepository<Passager, Long>{
 			}
 		}
 
-		return passager;
+		return reservation;
 	}
-	@Override
-	public Passager save(Passager obj) {
+	
+	public Reservation save(Reservation obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 
@@ -101,9 +102,8 @@ public class PassagerRepoJpa implements IRepository<Passager, Long>{
 
 		return obj;
 	}
-
-	@Override
-	public void delete(Passager obj) {
+	
+	public void delete(Reservation obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 
@@ -125,13 +125,8 @@ public class PassagerRepoJpa implements IRepository<Passager, Long>{
 			if (em != null) {
 				em.close();
 			}
-	
-		
-	}
 		}
+	}
+
+	
 }
-	
-
-
-
-	
