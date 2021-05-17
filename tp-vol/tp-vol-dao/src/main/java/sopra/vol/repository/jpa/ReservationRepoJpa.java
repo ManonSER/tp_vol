@@ -58,7 +58,7 @@ public class ReservationRepoJpa implements IReservationRepositoryJpa{
 			tx = em.getTransaction();
 			tx.begin();
 
-			reservation = em.find(Reservation.class, numero);
+			reservation = em.find(Reservation.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -127,4 +127,6 @@ public class ReservationRepoJpa implements IReservationRepositoryJpa{
 			}
 		}
 	}
+
+	
 }
