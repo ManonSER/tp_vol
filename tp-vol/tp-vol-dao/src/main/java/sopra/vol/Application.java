@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import sopra.vol.dao.IReservationDao;
 import sopra.vol.dao.sql.ReservationDaoSql;
 
@@ -22,9 +25,11 @@ import sopra.vol.dao.sql.PassagerDaoSql;
 import sopra.vol.dao.IClientDao;
 import sopra.vol.dao.IDao;
 import sopra.vol.dao.sql.ClientDaoSql;
-import sopra.vol.model.Client;
+//import sopra.vol.model.Client;
 
 public class Application {
+	
+	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("vol-jpa");
 	private static Application instance = null;
 	private final IBilletDao billetDao = new BilletDaoSql();
 	
@@ -33,9 +38,9 @@ public class Application {
 	private final ICompagnieAerienneDao compagnieAerienneDao = new CompagnieAerienneDaoSql();
 	private final ICompagnieAerienneVolDao compagnieAerienneVolDao = new CompagnieAerienneVolDaoSql();
 
-	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
-	private final String username = "root";
-	private final String password = "admin";
+//	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
+//	private final String username = "root";
+//	private final String password = "admin";
 	
 	private final IReservationDao reservationDao = new ReservationDaoSql();
 
@@ -81,8 +86,8 @@ public class Application {
 		return clientDao;
 	}
 
-	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(jdbcUrl, username, password);
+	public EntityManagerFactory getEmf() {
+		return emf;
 	}
 
 	public IReservationDao getReservationDao() {
