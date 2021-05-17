@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 
 import sopra.vol.dao.IReservationDao;
 import sopra.vol.dao.sql.ReservationDaoSql;
-
+import sopra.vol.repository.jpa.PassagerRepositoryJpa;
 import sopra.vol.dao.IBilletDao;
 import sopra.vol.dao.sql.BilletDaoSql;
 
@@ -31,20 +31,22 @@ public class Application {
 	
 	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("vol-jpa");
 	private static Application instance = null;
-	private final IBilletDao billetDao = new BilletDaoSql();
+//	private final IBilletDao billetDao = new BilletDaoSql();
 	
-	private final IPassagerDao passagerDao = new PassagerDaoSql();
-	private final IAdresseDao adresseDao = new AdresseDaoSql();
-	private final ICompagnieAerienneDao compagnieAerienneDao = new CompagnieAerienneDaoSql();
-	private final ICompagnieAerienneVolDao compagnieAerienneVolDao = new CompagnieAerienneVolDaoSql();
+	private final IPassagerDao passagerDao = new PassagerRepositoryJpa();
+//	private final IAdresseDao adresseDao = new AdresseDaoSql();
+	//private final ICompagnieAerienneDao compagnieAerienneDao = new CompagnieAerienneDaoSql();
+	//private final ICompagnieAerienneVolDao compagnieAerienneVolDao = new CompagnieAerienneVolDaoSql();
+	
+	//private final IReservationDao reservationDao = new ReservationDaoSql();
+
+	//private final IClientDao clientDao = new ClientDaoSql();
+	
 
 //	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
 //	private final String username = "root";
 //	private final String password = "admin";
 	
-	private final IReservationDao reservationDao = new ReservationDaoSql();
-
-	private final IClientDao clientDao = new ClientDaoSql();
 	
 	private Application() {
 		super();
@@ -58,19 +60,19 @@ public class Application {
 		return passagerDao;
 	}
 	
-	public IAdresseDao getAdresseDao() {
-		return adresseDao;
-	}
-	public ICompagnieAerienneDao getCompagnieAerienneDao() {
-		return compagnieAerienneDao;
-	}
-	public ICompagnieAerienneVolDao getCompagnieAerienneVolDao() {
-		return compagnieAerienneVolDao;
-	}
-
-	public IBilletDao getBilletDao() {
-		return billetDao;
-	}
+//	public IAdresseDao getAdresseDao() {
+//		return adresseDao;
+//	}
+//	public ICompagnieAerienneDao getCompagnieAerienneDao() {
+//		return compagnieAerienneDao;
+//	}
+//	public ICompagnieAerienneVolDao getCompagnieAerienneVolDao() {
+//		return compagnieAerienneVolDao;
+//	}
+//
+//	public IBilletDao getBilletDao() {
+//		return billetDao;
+//	}
 
 	public static Application getInstance() {
 		if (instance == null) {
@@ -82,17 +84,17 @@ public class Application {
 
 	
 	
-	public IClientDao getClientDao() {
-		return clientDao;
-	}
+//	public IClientDao getClientDao() {
+//		return clientDao;
+//	}
 
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
 
-	public IReservationDao getReservationDao() {
-		return reservationDao;
-	}
+//	public IReservationDao getReservationDao() {
+//		return reservationDao;
+//	}
 
 	
 }
