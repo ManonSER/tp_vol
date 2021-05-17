@@ -11,8 +11,8 @@ import sopra.vol.model.TypeIdentite;
 import sopra.vol.repository.IPassagerRepositoryJpa;
 
 public class TestJunit {
+	
 @Test	
-
 public void passagerCreate() {
 	
 	IPassagerRepositoryJpa passagerRepo = Application.getInstance().getPassagerDao();
