@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import sopra.formation.Application;
 import sopra.formation.model.Evaluation;
+import sopra.vol.model.Reservation;
 
 
 public class ReservationRepositoryJpa implements IReservationRepository{
