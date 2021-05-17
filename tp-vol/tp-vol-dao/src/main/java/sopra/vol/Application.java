@@ -17,18 +17,18 @@ import sopra.vol.repository.jpa.BilletRepoJpa;
 import sopra.vol.repository.jpa.ClientRepoJpa;
 import sopra.vol.repository.jpa.CompagnieAerienneRepoJpa;
 import sopra.vol.repository.jpa.CompagnieAerienneVolRepoJpa;
-import sopra.vol.repository.jpa.PassagerRepoJpa;
+//import sopra.vol.repository.jpa.PassagerRepoJpa;
 import sopra.vol.repository.jpa.ReservationRepoJpa;
 import sopra.vol.repository.jpa.VilleRepoJpa;
 
 public class Application {
 	
-	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("vol-jpa");
+	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("vol_jpa");
 	private static Application instance = null;
 	
 	
 	private final IBilletRepositoryJpa billetDao = new BilletRepoJpa();
-	private final IPassagerRepositoryJpa passagerDao = new PassagerRepoJpa();
+//	private final IPassagerRepositoryJpa passagerDao = new PassagerRepoJpa();
 	private final IAdresseRepositoryJpa adresseDao = new AdresseRepoJpa();
 	private final ICompagnieAerienneRepositoryJpa compagnieAerienneDao = new CompagnieAerienneRepoJpa();
 	private final ICompagnieAerienneVolRepositoryJpa compagnieAerienneVolDao = new CompagnieAerienneVolRepoJpa();
@@ -44,9 +44,9 @@ public class Application {
 			e.printStackTrace();
 		}
 	}
-	public IPassagerRepositoryJpa getPassagerDao() {
-		return passagerDao;
-	}
+//	public IPassagerRepositoryJpa getPassagerDao() {
+//		return passagerDao;
+//	}
 	
 	public IAdresseRepositoryJpa getAdresseDao() {
 		return adresseDao;
