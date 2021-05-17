@@ -4,15 +4,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 		
-	<persistence-unit name="vol-jpa" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="vol_jpa" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 <!-- 		Inutile si les classes sont dans le projet courant -->
-<!-- 		<class>sopra.formation.model.Evaluation</class> -->
+ 		<class>sopra.vol.model.Ville</class>
+ 		<class>sopra.vol.model.Ville</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vol-jpa" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vol_jpa" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="admin" />
 
