@@ -1,11 +1,26 @@
 package sopra.vol.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "passenger")
 public class Passager {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "name")
 	private String nom;
+	@Column(name = "firstname")
 	private String prenom;
+	@Column(name = "identity_number")
 	private String numeroIdentite;
+	@Column(name = "identity_type")
 	private TypeIdentite typeIdentite;
+	@OneToOne(mappedBy = "passager")
 	private Reservation reservation;
 
 	public Passager() {

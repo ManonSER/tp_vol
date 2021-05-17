@@ -8,16 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.vol.Application;
-import sopra.vol.model.Adresse;
-import sopra.vol.repository.IAdresseRepositoryJpa;
 
-public class AdresseRepoJpa implements IAdresseRepositoryJpa {
+import sopra.vol.model.Ville;
+import sopra.vol.repository.IVilleRepositoryJpa;
+
+public class VilleRepoJpa implements IVilleRepositoryJpa{
 
 	@Override
-	public List<Adresse> findAll() {
-		// TODO Auto-generated method stub
-		
-		List<Adresse> adresses = new ArrayList<Adresse>();
+	public List<Ville> findAll() {
+		List<Ville> villes = new ArrayList<Ville>();
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -27,9 +26,9 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Adresse> query = em.createQuery("select e from Adresse e", Adresse.class);
+			TypedQuery<Ville> query = em.createQuery("select v from Ville v", Ville.class);
 
-			adresses = query.getResultList();
+			villes = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -44,13 +43,12 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresses;
+		return villes;
 	}
 
 	@Override
-	public Adresse findById(Long id) {
-		// TODO Auto-generated method stub
-		Adresse adresse = null;
+	public Ville findById(Long id) {
+		Ville ville = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -60,7 +58,7 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			adresse = em.find(Adresse.class, id);
+			ville = em.find(Ville.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -75,7 +73,7 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresse;
+		return ville;
 	}
-	
+
 }

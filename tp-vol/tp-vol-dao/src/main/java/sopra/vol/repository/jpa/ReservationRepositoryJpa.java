@@ -13,7 +13,7 @@ import sopra.vol.model.Reservation;
 import sopra.vol.repository.IReservationRepositoryJpa;
 
 
-public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
+public class ReservationRepoJpa implements IReservationRepositoryJpa{
 
 	public List<Reservation> findAll() {
 		List<Reservation> reservations = new ArrayList<Reservation>();

@@ -1,12 +1,35 @@
 package sopra.vol.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Ticket")
 public class Billet {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "place_number")
 	private String numeroPlace;
+	@Column(name = "class")
 	private String classe;
+	@Column(name = "price")
 	private float prix;
+	@Column(name = "order_notTheOneInSql")
 	private int ordre;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reservation")
 	private Reservation reservation;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "flight")
 	private Vol vol;
 
 	public Billet() {
