@@ -48,7 +48,7 @@ public class Application {
 	private static Application instance = null;
 	
 	
-	private final IBilletRepositoryJpa billetDao = new BilletRepoJpa();
+	
 	private final IPassagerRepositoryJpa passagerDao = new PassagerRepoJpa();
 	private final IAdresseRepositoryJpa adresseDao = new AdresseRepoJpa();
 	private final ICompagnieAerienneRepositoryJpa compagnieAerienneDao = new CompagnieAerienneRepoJpa();
@@ -79,9 +79,9 @@ public class Application {
 		return compagnieAerienneVolDao;
 	}
 
-	public IBilletRepositoryJpa getBilletDao() {
-		return billetDao;
-	}
+//	public IBilletRepositoryJpa getBilletDao() {
+//		return billetDao;
+//	}
 
 	public static Application getInstance() {
 		if (instance == null) {

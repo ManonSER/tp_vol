@@ -47,7 +47,7 @@ public class ReservationRepoJpa implements IReservationRepositoryJpa{
 		
 	}
 	
-	public Reservation findById(Integer numero) {
+	public Reservation findById(Long numero) {
 		Reservation reservation = null;
 
 		EntityManager em = null;
