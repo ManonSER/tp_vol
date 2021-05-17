@@ -1,10 +1,26 @@
 package sopra.vol.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "stopover")
 public class Escale {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "start_hour")
 	private Horaire hDepart;
+	@Column(name = "arrival_hour")
 	private Horaire hArrivee;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Vol vol;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Aeroport aeroport;
 
 	public Escale() {
