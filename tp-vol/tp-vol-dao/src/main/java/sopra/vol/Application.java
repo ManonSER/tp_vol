@@ -8,8 +8,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import sopra.vol.dao.IReservationDao;
+import sopra.vol.dao.IVilleDao;
 import sopra.vol.dao.sql.ReservationDaoSql;
-
+import sopra.vol.repository.IAdresseRepositoryJpa;
+import sopra.vol.repository.IClientRepositoryJpa;
+import sopra.vol.repository.ICompagnieAerienneRepositoryJpa;
+import sopra.vol.repository.ICompagnieAerienneVolRepositoryJpa;
+import sopra.vol.repository.IPassagerRepositoryJpa;
+import sopra.vol.repository.IReservationRepositoryJpa;
+import sopra.vol.repository.IVilleRepositoryJpa;
+import sopra.vol.repository.jpa.CompagnieAerienneRepoJpa;
+import sopra.vol.repository.jpa.CompagnieAerienneVolRepoJpa;
+import sopra.vol.repository.jpa.PassagerRepoJpa;
+import sopra.vol.repository.jpa.PassagerRepoJpa;
+import sopra.vol.repository.jpa.VilleRepoJpa;
 import sopra.vol.dao.IBilletDao;
 import sopra.vol.dao.sql.BilletDaoSql;
 
@@ -34,12 +46,13 @@ public class Application {
 	
 	
 	private final IBilletDao billetDao = new BilletDaoSql();
-	private final IPassagerDao passagerDao = new PassagerDaoSql();
-	private final IAdresseDao adresseDao = new AdresseDaoSql();
-	private final ICompagnieAerienneDao compagnieAerienneDao = new CompagnieAerienneDaoSql();
-	private final ICompagnieAerienneVolDao compagnieAerienneVolDao = new CompagnieAerienneVolDaoSql();
-	private final IReservationDao reservationDao = new ReservationDaoSql();
-	private final IClientDao clientDao = new ClientDaoSql();
+	private final IPassagerRepositoryJpa passagerDao = new PassagerRepoJpa();
+	private final IAdresseRepositoryJpa adresseDao = new AdresseDaoSql();
+	private final ICompagnieAerienneRepositoryJpa compagnieAerienneDao = new CompagnieAerienneRepoJpa();
+	private final ICompagnieAerienneVolRepositoryJpa compagnieAerienneVolDao = new CompagnieAerienneVolRepoJpa();
+	private final IReservationRepositoryJpa reservationDao = new ReservationDaoSql();
+	private final IClientRepositoryJpa clientDao = new ClientDaoSql();
+	private final IVilleRepositoryJpa villeDao = new VilleRepoJpa();
 	
 	private Application() {
 		super();
