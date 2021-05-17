@@ -4,15 +4,38 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Flight")
 public class Vol {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "statut_flight")
 	private StatutVol statutVol;
+	@Column(name = "dt_start")
 	private Date dtDepart;
+	@Column(name = "dt_arrival")
 	private Date dtArrivee;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "start_airport")
 	private Aeroport depart;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "arrival_airport")
 	private Aeroport arrivee;
+	@Column(name  = "nb_of_free_place")
 	private int nbPlaceDispo;
+	@OneToMany(mappedBy = "vol")
 	private List<Billet> billets = new ArrayList<>();
+	@OneToMany(mappedBy = "vol")
 	private List<CompagnieAerienneVol> compagnieAeriennes = new ArrayList<CompagnieAerienneVol>();
 
 	public Vol() {
