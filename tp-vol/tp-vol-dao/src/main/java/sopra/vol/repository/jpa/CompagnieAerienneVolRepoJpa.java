@@ -8,16 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.vol.Application;
-import sopra.vol.model.Adresse;
-import sopra.vol.repository.IAdresseRepositoryJpa;
+import sopra.vol.model.CompagnieAerienne;
+import sopra.vol.model.CompagnieAerienneVol;
+import sopra.vol.repository.ICompagnieAerienneVolRepositoryJpa;
 
-public class AdresseRepoJpa implements IAdresseRepositoryJpa {
+public class CompagnieAerienneVolRepoJpa implements ICompagnieAerienneVolRepositoryJpa {
 
 	@Override
-	public List<Adresse> findAll() {
-		// TODO Auto-generated method stub
-		
-		List<Adresse> adresses = new ArrayList<Adresse>();
+	public List<CompagnieAerienneVol> findAll() {
+		List<CompagnieAerienneVol> compagnieAerienneVols = new ArrayList<CompagnieAerienneVol>();
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -27,9 +26,9 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Adresse> query = em.createQuery("select e from Adresse e", Adresse.class);
+			TypedQuery<CompagnieAerienneVol> query = em.createQuery("select c from Compagnie_Aerienne_Vol c", CompagnieAerienneVol.class);
 
-			adresses = query.getResultList();
+			compagnieAerienneVols = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -44,13 +43,13 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresses;
+		return compagnieAerienneVols;
 	}
 
+
 	@Override
-	public Adresse findById(Long id) {
-		// TODO Auto-generated method stub
-		Adresse adresse = null;
+	public CompagnieAerienneVol findById(Long id) {
+		CompagnieAerienneVol compagnieAerienneVol = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -60,7 +59,7 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			tx = em.getTransaction();
 			tx.begin();
 
-			adresse = em.find(Adresse.class, id);
+			compagnieAerienneVol = em.find(CompagnieAerienneVol.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -75,7 +74,8 @@ public class AdresseRepoJpa implements IAdresseRepositoryJpa {
 			}
 		}
 
-		return adresse;
+		return compagnieAerienneVol;
 	}
-	
+
+
 }
