@@ -71,4 +71,10 @@ public class Reservation {
 		this.billets = billets;
 	}
 
+	@Override
+	public String toString() {
+		return "Reservation [numero=" + numero + ", dtReservation=" + dtReservation + ", statut=" + statut + ", client="
+				+ client + ", passager=" + passager + ", billets=" + billets + "]";
+	}
+
 }

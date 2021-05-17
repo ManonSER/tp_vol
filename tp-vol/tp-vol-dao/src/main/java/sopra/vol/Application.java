@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import sopra.vol.dao.IReservationDao;
+import sopra.vol.dao.sql.ReservationDaoSql;
+
+import sopra.vol.dao.IBilletDao;
+import sopra.vol.dao.sql.BilletDaoSql;
+
 import sopra.vol.dao.IAdresseDao;
 import sopra.vol.dao.ICompagnieAerienneDao;
 import sopra.vol.dao.ICompagnieAerienneVolDao;
@@ -13,8 +19,14 @@ import sopra.vol.dao.sql.CompagnieAerienneDaoSql;
 import sopra.vol.dao.sql.CompagnieAerienneVolDaoSql;
 import sopra.vol.dao.sql.PassagerDaoSql;
 
+import sopra.vol.dao.IClientDao;
+import sopra.vol.dao.IDao;
+import sopra.vol.dao.sql.ClientDaoSql;
+import sopra.vol.model.Client;
+
 public class Application {
 	private static Application instance = null;
+	private final IBilletDao billetDao = new BilletDaoSql();
 	
 	private final IPassagerDao passagerDao = new PassagerDaoSql();
 	private final IAdresseDao adresseDao = new AdresseDaoSql();
@@ -24,7 +36,11 @@ public class Application {
 	private final String jdbcUrl = "jdbc:mysql://localhost:3306/tp_vol";
 	private final String username = "root";
 	private final String password = "admin";
+	
+	private final IReservationDao reservationDao = new ReservationDaoSql();
 
+	private final IClientDao clientDao = new ClientDaoSql();
+	
 	private Application() {
 		super();
 		try {
@@ -47,6 +63,10 @@ public class Application {
 		return compagnieAerienneVolDao;
 	}
 
+	public IBilletDao getBilletDao() {
+		return billetDao;
+	}
+
 	public static Application getInstance() {
 		if (instance == null) {
 			instance = new Application();
@@ -55,8 +75,19 @@ public class Application {
 		return instance;
 	}
 
+	
+	
+	public IClientDao getClientDao() {
+		return clientDao;
+	}
+
 	public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(jdbcUrl, username, password);
 	}
 
+	public IReservationDao getReservationDao() {
+		return reservationDao;
+	}
+
+	
 }
