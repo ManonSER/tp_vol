@@ -13,7 +13,7 @@ import sopra.vol.model.Reservation;
 import sopra.vol.repository.IReservationRepositoryJpa;
 
 
-public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
+public class ReservationRepoJpa implements IReservationRepositoryJpa{
 
 	public List<Reservation> findAll() {
 		List<Reservation> reservations = new ArrayList<Reservation>();
@@ -47,7 +47,7 @@ public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
 		
 	}
 	
-	public Reservation findById(Integer numero) {
+	public Reservation findById(Long numero) {
 		Reservation reservation = null;
 
 		EntityManager em = null;
@@ -127,6 +127,4 @@ public class ReservationRepositoryJpa implements IReservationRepositoryJpa{
 			}
 		}
 	}
-
-	
 }

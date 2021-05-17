@@ -10,9 +10,9 @@ import javax.persistence.TypedQuery;
 
 import sopra.vol.Application;
 import sopra.vol.model.Passager;
-import sopra.vol.repository.IRepository;
+import sopra.vol.repository.IPassagerRepositoryJpa;
 
-public class PassagerRepoJpa implements IRepository<Passager, Long>{
+public class PassagerRepoJpa implements IPassagerRepositoryJpa{
 
 	@Override
 	public List<Passager> findAll() {
