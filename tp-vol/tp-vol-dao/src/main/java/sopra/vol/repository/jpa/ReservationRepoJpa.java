@@ -47,8 +47,7 @@ public class ReservationRepoJpa implements IReservationRepositoryJpa{
 		
 	}
 	
-	@Override
-	public Reservation findById(Integer id) {
+	public Reservation findById(Integer numero) {
 		Reservation reservation = null;
 
 		EntityManager em = null;

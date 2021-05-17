@@ -8,15 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.vol.Application;
-import sopra.vol.model.Billet;
-import sopra.vol.repository.IBilletRepositoryJpa;
+import sopra.vol.model.Vol;
+import sopra.vol.repository.IVolRepositoryJpa;
 
-public class BilletRepoJpa implements IBilletRepositoryJpa{
+public class VolRepoJpa implements IVolRepositoryJpa {
 
 	@Override
-	public List<Billet> findAll() {
+	public List<Vol> findAll() {
 		
-		List<Billet> billets = new ArrayList<Billet>();
+		List<Vol> vols = new ArrayList<Vol>();
 		
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -26,9 +26,9 @@ public class BilletRepoJpa implements IBilletRepositoryJpa{
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Billet> query = em.createQuery("select b from Billet r", Billet.class);
+			TypedQuery<Vol> query = em.createQuery("select v from Vol v", Vol.class);
 
-			billets = query.getResultList();
+			vols = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -43,13 +43,13 @@ public class BilletRepoJpa implements IBilletRepositoryJpa{
 			}
 		}
 
-		return billets;
+		return vols;
 	}
 
 	@Override
-	public Billet findById(Long id) {
+	public Vol findById(Long id) {
 		
-		Billet billet = null;
+		Vol vol = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -59,7 +59,7 @@ public class BilletRepoJpa implements IBilletRepositoryJpa{
 			tx = em.getTransaction();
 			tx.begin();
 
-			billet = em.find(Billet.class, id);
+			vol = em.find(Vol.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -74,6 +74,7 @@ public class BilletRepoJpa implements IBilletRepositoryJpa{
 			}
 		}
 
-		return billet;
+		return vol;
 	}
+
 }
