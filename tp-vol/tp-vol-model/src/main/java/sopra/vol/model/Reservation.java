@@ -4,12 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "Reservation")
 public class Reservation {
+	@Id
+	@GeneratedValue
 	private Integer numero;
+	@Column(name = "dt_reservation")
 	private Date dtReservation;
 	private StatutReservation statut;
 	private Client client;
 	private Passager passager;
+	
 	private List<Billet> billets = new ArrayList<>();
 
 	public Reservation() {
